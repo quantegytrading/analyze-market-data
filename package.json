@@ -1,0 +1,22 @@
+{
+  "name": "analyze-market-data",
+  "version": "1.0.0",
+  "description": "Analyze market data as delivered by get-market-data function",
+  "main": "handler.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quantegytrading/analyze-market-data.git"
+  },
+  "author": "Adam Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quantegytrading/analyze-market-data/issues"
+  },
+  "homepage": "https://github.com/quantegytrading/analyze-market-data#readme",
+  "dependencies": {
+    "serverless-python-requirements": "^5.1.0"
+  }
+}
