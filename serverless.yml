@@ -13,6 +13,7 @@
 
 service: quantegy-analyze
 
+
 provider:
   name: aws
   runtime: python3.8
