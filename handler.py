@@ -13,6 +13,7 @@ def main(event, context):
     sells = []
     message = {}
     event_message = event['Records'][0]['Sns']['Message']
+    print(str(event_message))
     market_data = event_message['market_data']
     # symbols_string = event_message['currencies']
     # symbols_string = symbols_string.lstrip('[')
