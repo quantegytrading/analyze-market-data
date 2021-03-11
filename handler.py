@@ -12,16 +12,19 @@ def main(event, context):
     buys = []
     sells = []
     message = {}
-    market_data = []
+    # market_data = []
 
-    event_message = event['Records'][0]['Sns']['Message']
+    event_message = json.loads(event['Records'][0]['Sns']['Message'])
     # print(str(event))
     # print(str(event_message))
     # event_message = json.loads(event_message)
     # print(str(event_message))
-    for entry in event_message['market_data']:
-        market_data.append(entry)
-    print(str(market_data))
+    data_type = event_message['data_type']
+    exchange = event_message['exchange']
+    market_data = event_message['market_data']
+    # for entry in event_message['market_data']:
+    #     market_data.append(entry)
+    # print(str(market_data))
     # symbols_string = event_message['currencies']
     # symbols_string = symbols_string.lstrip('[')
     # symbols_string = symbols_string.rstrip(']')
