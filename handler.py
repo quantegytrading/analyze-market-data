@@ -13,6 +13,9 @@ def main(event, context):
     sells = []
     message = {}
     event_message = event['Records'][0]['Sns']['Message']
+    print(str(event))
+    print(str(event_message))
+    event_message = json.loads(event_message)
     print(str(event_message))
     market_data = json.loads(event_message['market_data'])
     print(str(market_data))
