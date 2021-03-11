@@ -29,9 +29,8 @@ provider:
         - arn:aws:iam::aws:policy/AmazonTimestreamFullAccess
 
 functions:
-  analyze-market-data:
+  analyze-market-data-apollonia:
     handler: handler.main
-
     events:
       - sns: analyze-quantegy-data
 

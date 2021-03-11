@@ -17,11 +17,14 @@ def get_candle_package(symbol, candles):
 
 
 def main(event, context):
+
+    algorithm = "apollonia"
+
     sns = boto3.client('sns')
     buys = []
     sells = []
     message = {}
-
+    print(str(event))
     event_message = json.loads(event['Records'][0]['Sns']['Message'])
 
     data_type = event_message['data_type']
@@ -43,6 +46,14 @@ def main(event, context):
 
     print("Buys: " + str(buys))
     print("Sells: " + str(sells))
+
+    message['buys'] = buys
+    message['sells'] = sells
+    message['algorithm'] = algorithm
+    message['data_type'] = data_type
+    message['exchange'] = exchange
+    message['env'] = "soak"
+
     sns.publish(
         TargetArn='arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-soak',
         Message=json.dumps(message)
