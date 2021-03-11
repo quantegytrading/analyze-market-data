@@ -40,7 +40,7 @@ def main(event, context):
     sells = []
     message = {}
     event_message = json.loads(event['Records'][0]['Sns']['Message'])
-    recv_topic_arn = json.loads(event['Records'][0]['Sns']['TopicArn'])
+    recv_topic_arn = event['Records'][0]['Sns']['TopicArn']
     env = get_env(recv_topic_arn)
     data_type = event_message['data_type']
     exchange = event_message['exchange']
