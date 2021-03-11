@@ -30,7 +30,6 @@ def get_target_arn(recv_topic_arn: str) -> str:
         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-soak"
 
 
-
 def main(event, context):
 
     algorithm = "apollonia"
@@ -40,7 +39,7 @@ def main(event, context):
     sells = []
     message = {}
     event_message = json.loads(event['Records'][0]['Sns']['Message'])
-    recv_topic_arn = json.loads(event['Records'][0]['Sns']['TopicArn'])
+    recv_topic_arn = event['Records'][0]['Sns']['TopicArn']
     env = get_env(recv_topic_arn)
     data_type = event_message['data_type']
     exchange = event_message['exchange']
