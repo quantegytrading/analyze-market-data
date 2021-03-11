@@ -8,26 +8,28 @@ from analysis import bullish_patterns_present, bearish_patterns_present
 
 def main(event, context):
     sns = boto3.client('sns')
-    dynamodb = boto3.resource('dynamodb')
+    # dynamodb = boto3.resource('dynamodb')
     buys = []
     sells = []
     message = {}
-    symbols_string = event['Records'][0]['Sns']['Message']
-    symbols_string = symbols_string.lstrip('[')
-    symbols_string = symbols_string.rstrip(']')
-    symbols_string = symbols_string.replace('"', '')
-    symbols_string.replace(" ", "")
-    symbols = symbols_string.split(",")
-    keys = []
-    for symbol in symbols:
-        sym_dic = {"symbol": symbol.strip()}
-        keys.append(sym_dic)
-    keys_dict = {"Keys": keys}
-    responses = dynamodb.batch_get_item(
-        RequestItems={
-            'market-data': keys_dict
-        })
-    market_data: list = responses['Responses']["market-data"]
+    event_message = event['Records'][0]['Sns']['Message']
+    market_data = event_message['market_data']
+    # symbols_string = event_message['currencies']
+    # symbols_string = symbols_string.lstrip('[')
+    # symbols_string = symbols_string.rstrip(']')
+    # symbols_string = symbols_string.replace('"', '')
+    # symbols_string.replace(" ", "")
+    # symbols = symbols_string.split(",")
+    # keys = []
+    # for symbol in symbols:
+    #     sym_dic = {"symbol": symbol.strip()}
+    #     keys.append(sym_dic)
+    # keys_dict = {"Keys": keys}
+    # responses = dynamodb.batch_get_item(
+    #     RequestItems={
+    #         'market-data': keys_dict
+    #     })
+    # market_data: list = responses['Responses']["market-data"]
     for datum in market_data:
         s = datum['symbol']
         d = datum['data']
