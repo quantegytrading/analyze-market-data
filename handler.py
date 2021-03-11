@@ -14,7 +14,8 @@ def main(event, context):
     message = {}
     event_message = event['Records'][0]['Sns']['Message']
     print(str(event_message))
-    market_data = event_message['market_data']
+    market_data = json.loads(event_message['market_data'])
+    print(str(market_data))
     # symbols_string = event_message['currencies']
     # symbols_string = symbols_string.lstrip('[')
     # symbols_string = symbols_string.rstrip(']')
