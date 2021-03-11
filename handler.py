@@ -16,6 +16,21 @@ def get_candle_package(symbol, candles):
     return ThreeCandles(candle1, candle2, candle3)
 
 
+def get_env(recv_topic_arn: str) -> str:
+    if recv_topic_arn.find("backtest") != -1:
+        return "backtest"
+    else:
+        return "soak"
+
+
+def get_target_arn(recv_topic_arn: str) -> str:
+    if recv_topic_arn.find("backtest") != -1:
+        return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-backtest"
+    else:
+        return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-soak"
+
+
+
 def main(event, context):
 
     algorithm = "apollonia"
@@ -24,9 +39,9 @@ def main(event, context):
     buys = []
     sells = []
     message = {}
-    print(str(event))
     event_message = json.loads(event['Records'][0]['Sns']['Message'])
-
+    recv_topic_arn = event['Records'][0]['Sns']['TopicArn']
+    env = get_env(recv_topic_arn)
     data_type = event_message['data_type']
     exchange = event_message['exchange']
     market_data_list = event_message['market_data']
@@ -52,10 +67,13 @@ def main(event, context):
     message['algorithm'] = algorithm
     message['data_type'] = data_type
     message['exchange'] = exchange
-    message['env'] = "soak"
+    message['env'] = env
+    target_arn = get_target_arn(recv_topic_arn)
+    print(env)
+    print(target_arn)
 
     sns.publish(
-        TargetArn='arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-soak',
+        TargetArn=target_arn,
         Message=json.dumps(message)
     )
 
