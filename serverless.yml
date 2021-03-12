@@ -30,7 +30,7 @@ provider:
 
 functions:
   analyze-market-data-apollonia:
-    handler: bauhaus.main
+    handler: apollonia.main
     events:
       - sns: analyze-quantegy-data-soak
   analyze-market-data-bauhaus:

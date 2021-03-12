@@ -1,4 +1,4 @@
-# handler.py
+# apollonia.py
 import json
 import boto3
 
@@ -32,7 +32,7 @@ def get_target_arn(recv_topic_arn: str) -> str:
 
 def main(event, context):
 
-    algorithm = "apollonia"
+    algorithm = "bauhaus"
 
     sns = boto3.client('sns')
     buys = []

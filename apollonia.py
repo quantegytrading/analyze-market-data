@@ -1,4 +1,4 @@
-# handler.py
+# apollonia.py
 import json
 import boto3
 
