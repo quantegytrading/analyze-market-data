@@ -30,9 +30,13 @@ provider:
 
 functions:
   analyze-market-data-apollonia:
-    handler: handler.main
+    handler: bauhaus.main
     events:
-      - sns: analyze-quantegy-data
+      - sns: analyze-quantegy-data-soak
+  analyze-market-data-bauhaus:
+    handler: bauhaus.main
+    events:
+      - sns: analyze-quantegy-data-soak
 
 plugins:
   - serverless-python-requirements

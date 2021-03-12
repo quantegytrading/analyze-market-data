@@ -54,9 +54,9 @@ def main(event, context):
             last_candles = data[-3:]
             ccc = get_candle_package(symbol, last_candles)
             if bullish_patterns_present(ccc):
-                buys.append(symbol)
-            if bearish_patterns_present(ccc):
                 sells.append(symbol)
+            if bearish_patterns_present(ccc):
+                buys.append(symbol)
 
     print("Buys: " + str(buys))
     print("Sells: " + str(sells))
