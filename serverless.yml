@@ -33,10 +33,12 @@ functions:
     handler: apollonia.main
     events:
       - sns: analyze-quantegy-data-soak
+      - sns: analyze-quantegy-data-backtest
   analyze-market-data-bauhaus:
     handler: bauhaus.main
     events:
       - sns: analyze-quantegy-data-soak
+      - sns: analyze-quantegy-data-backtest
 
 plugins:
   - serverless-python-requirements
