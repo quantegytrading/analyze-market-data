@@ -44,6 +44,7 @@ def main(event, context):
     data_type = event_message['data_type']
     exchange = event_message['exchange']
     market_data_list = event_message['market_data']
+    backtesttime = ""
 
     for market_data in market_data_list:
         symbol = market_data['symbol']
@@ -53,6 +54,7 @@ def main(event, context):
         else:
             last_candles = data[-3:]
             ccc = get_candle_package(symbol, last_candles)
+            backtesttime = ccc.candle1.u
             if bullish_patterns_present(ccc):
                 sells.append(symbol)
             if bearish_patterns_present(ccc):
@@ -66,6 +68,7 @@ def main(event, context):
     message['algorithm'] = algorithm
     message['data_type'] = data_type
     message['exchange'] = exchange
+    message['backtest-time'] = backtesttime
     message['env'] = env
     target_arn = get_target_arn(recv_topic_arn)
     print(env)

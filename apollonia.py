@@ -38,6 +38,7 @@ def main(event, context):
     buys = []
     sells = []
     message = {}
+    backtesttime = ""
     event_message = json.loads(event['Records'][0]['Sns']['Message'])
     recv_topic_arn = event['Records'][0]['Sns']['TopicArn']
     env = get_env(recv_topic_arn)
@@ -53,6 +54,7 @@ def main(event, context):
         else:
             last_candles = data[-3:]
             ccc = get_candle_package(symbol, last_candles)
+            backtesttime = ccc.candle1.u
             if bullish_patterns_present(ccc):
                 buys.append(symbol)
             if bearish_patterns_present(ccc):
@@ -66,6 +68,7 @@ def main(event, context):
     message['algorithm'] = algorithm
     message['data_type'] = data_type
     message['exchange'] = exchange
+    message['backtest-time'] = backtesttime
     message['env'] = env
     target_arn = get_target_arn(recv_topic_arn)
     print(env)
