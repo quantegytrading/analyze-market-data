@@ -1,9 +1,9 @@
-name: Deploy soak branch
+name: Deploy main branch
 
 on:
   push:
     branches:
-      - soak
+      - main
 
 jobs:
   deploy:

@@ -4,4 +4,4 @@
 ## TODO
 - incorporate stockstats, pandas, numpy
 - MACD and RSI
-- merge everything back to main
+- ~~merge everything back to main~~
