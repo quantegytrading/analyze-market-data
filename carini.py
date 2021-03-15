@@ -1,9 +1,11 @@
 # apollonia.py
 import json
 import boto3
-
+import pandas as pd
+from stockstats import StockDataFrame as sdf
 from domain.objects import Candle, ThreeCandles
 from analyze import bullish_patterns_present, bearish_patterns_present
+
 
 
 def get_candle_package(symbol, candles):
@@ -32,20 +34,20 @@ def get_target_arn(recv_topic_arn: str) -> str:
 
 def main(event, context):
 
-    algorithm = "apollonia"
+    algorithm = "carini"
+    stock = sdf.retype(pd.read_csv('stock.csv'))
 
     sns = boto3.client('sns')
     buys = []
     sells = []
     message = {}
-    backtesttime = ""
-    print(str(event))
     event_message = json.loads(event['Records'][0]['Sns']['Message'])
     recv_topic_arn = event['Records'][0]['Sns']['TopicArn']
     env = get_env(recv_topic_arn)
     data_type = event_message['data_type']
     exchange = event_message['exchange']
     market_data_list = event_message['market_data']
+    backtesttime = ""
 
     for market_data in market_data_list:
         symbol = market_data['symbol']
@@ -57,9 +59,9 @@ def main(event, context):
             ccc = get_candle_package(symbol, last_candles)
             backtesttime = ccc.candle1.u
             if bullish_patterns_present(ccc):
-                buys.append(symbol)
-            if bearish_patterns_present(ccc):
                 sells.append(symbol)
+            if bearish_patterns_present(ccc):
+                buys.append(symbol)
 
     print("Buys: " + str(buys))
     print("Sells: " + str(sells))
