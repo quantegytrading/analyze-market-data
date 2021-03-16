@@ -69,10 +69,15 @@ def main(event, context):
             buys.append(apollonia(ccc))
             buy_prices[symbol] = ccc.candle1.c
 
-    print("Buys: " + str(buys))
+    flat_buys = []
+    for buy in buys:
+        if buy:
+            flat_buys.append(buy[0])
+
+    print("Buys: " + str(flat_buys))
     print("Sells: " + str(sells))
 
-    message['buys'] = buys
+    message['buys'] = flat_buys
     message['buy_prices'] = buy_prices
     message['sells'] = sells
     message['algorithm'] = algorithm
