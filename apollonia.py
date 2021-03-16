@@ -63,8 +63,6 @@ def main(event, context):
             if bearish_patterns_present(ccc):
                 sells.append(symbol)
 
-    print("Buys: " + str(buys))
-    print("Sells: " + str(sells))
 
     message['buys'] = buys
     message['buy_prices'] = buy_prices
@@ -74,6 +72,9 @@ def main(event, context):
     message['exchange'] = exchange
     message['backtest-time'] = backtesttime
     message['env'] = env
+
+    print(message)
+
     target_arn = get_target_arn(recv_topic_arn)
     print(env)
     print(target_arn)
