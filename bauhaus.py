@@ -36,6 +36,7 @@ def main(event, context):
 
     sns = boto3.client('sns')
     buys = []
+    buy_prices = {}
     sells = []
     message = {}
     event_message = json.loads(event['Records'][0]['Sns']['Message'])
@@ -59,11 +60,13 @@ def main(event, context):
                 sells.append(symbol)
             if bearish_patterns_present(ccc):
                 buys.append(symbol)
+                buy_prices[symbol] = str(ccc.candle1.c)
 
     print("Buys: " + str(buys))
     print("Sells: " + str(sells))
 
     message['buys'] = buys
+    message['buy_prices'] = buy_prices
     message['sells'] = sells
     message['algorithm'] = algorithm
     message['data_type'] = data_type

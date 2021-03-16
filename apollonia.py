@@ -63,7 +63,6 @@ def main(event, context):
             if bearish_patterns_present(ccc):
                 sells.append(symbol)
 
-
     message['buys'] = buys
     message['buy_prices'] = buy_prices
     message['sells'] = sells
