@@ -35,7 +35,7 @@ def bauhaus(ccc):
     symbol = ""
     # if bullish_patterns_present(ccc):
     if bearish_patterns_present(ccc):
-        symbol = ccc.candle1.c
+        symbol = ccc.candle1.s
         buys.append(symbol)
     return buys
 
