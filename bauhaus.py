@@ -5,6 +5,7 @@ from analyze import bullish_patterns_present, bearish_patterns_present
 def bauhaus(ccc):
     buys = []
     sells = []
+    symbol = ""
     if bullish_patterns_present(ccc):
         symbol = ccc.candle1.c
         sells.append(symbol)
