@@ -10,4 +10,4 @@ def bauhaus(ccc):
         sells.append(symbol)
     if bearish_patterns_present(ccc):
         buys.append(symbol)
-    return buys, sells
+    return buys

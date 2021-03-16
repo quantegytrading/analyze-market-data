@@ -11,4 +11,4 @@ def apollonia(ccc):
         buys.append(symbol)
     if bearish_patterns_present(ccc):
         sells.append(symbol)
-    return buys, sells
+    return buys

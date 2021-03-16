@@ -60,9 +60,9 @@ def main(event, context):
             backtesttime = ccc.candle1.u
 
             if algorithm == 'apollonia':
-                buys, sells = apollonia(ccc)
+                buys = apollonia(ccc)
             elif algorithm == 'bauhaus':
-                buys, sells = bauhaus(ccc)
+                buys = bauhaus(ccc)
             buy_prices[symbol] = ccc.candle1.c
 
     print("Buys: " + str(buys))
