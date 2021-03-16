@@ -42,7 +42,7 @@ def apollonia(ccc):
 
 def main(event, context):
 
-    algorithm = "bauhaus"
+    algorithm = "apollonia"
 
     sns = boto3.client('sns')
     buys = []
