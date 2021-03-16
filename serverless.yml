@@ -29,16 +29,21 @@ provider:
         - arn:aws:iam::aws:policy/AmazonTimestreamFullAccess
 
 functions:
-  analyze-market-data-apollonia:
-    handler: apollonia.main
+  analyze-market-data-merge:
+    handler: handler.main
     events:
       - sns: analyze-quantegy-data-soak
       - sns: analyze-quantegy-data-backtest
-  analyze-market-data-bauhaus:
-    handler: bauhaus.main
-    events:
-      - sns: analyze-quantegy-data-soak
-      - sns: analyze-quantegy-data-backtest
+#  analyze-market-data-apollonia:
+#    handler: apollonia.main
+#    events:
+#      - sns: analyze-quantegy-data-soak
+#      - sns: analyze-quantegy-data-backtest
+#  analyze-market-data-bauhaus:
+#    handler: bauhaus.main
+#    events:
+#      - sns: analyze-quantegy-data-soak
+#      - sns: analyze-quantegy-data-backtest
 
 plugins:
   - serverless-python-requirements
