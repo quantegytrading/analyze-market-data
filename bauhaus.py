@@ -66,7 +66,7 @@ def main(event, context):
             last_candles = data[-3:]
             ccc = get_candle_package(symbol, last_candles)
             backtesttime = ccc.candle1.u
-            buys = bauhaus(ccc)
+            buys.append(bauhaus(ccc))
             buy_prices[symbol] = ccc.candle1.c
 
     print("Buys: " + str(buys))
