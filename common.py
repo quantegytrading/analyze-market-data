@@ -1,9 +1,7 @@
 # apolloniabak.py
 import json
 import boto3
-
 from domain.objects import Candle, ThreeCandles
-from analyze import bullish_patterns_present, bearish_patterns_present
 
 
 def get_candle_package(symbol, candles):
@@ -30,15 +28,11 @@ def get_target_arn(recv_topic_arn: str) -> str:
         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-soak"
 
 
-def common(event, algorithm_name, algorithm_fn):
-
-    algorithm = algorithm_name
-
+def go(event, algorithm, algorithm_fn):
     sns = boto3.client('sns')
     buys = []
     buy_prices = {}
     sells = []
-    message = {}
     event_message = json.loads(event['Records'][0]['Sns']['Message'])
     recv_topic_arn = event['Records'][0]['Sns']['TopicArn']
     env = get_env(recv_topic_arn)
@@ -64,14 +58,17 @@ def common(event, algorithm_name, algorithm_fn):
         if buy:
             flat_buys.append(buy[0])
 
-    message['buys'] = flat_buys
-    message['buy_prices'] = buy_prices
-    message['sells'] = sells
-    message['algorithm'] = algorithm
-    message['data_type'] = data_type
-    message['exchange'] = exchange
-    message['backtest-time'] = backtesttime
-    message['env'] = env
+    message = {
+        'algorithm': algorithm,
+        'env': env,
+        'buys': flat_buys,
+        'buy_prices': buy_prices,
+        'sells': sells,
+        'data_type': data_type,
+        'exchange': exchange,
+        'backtest-time': backtesttime
+    }
+
     target_arn = get_target_arn(recv_topic_arn)
     print(target_arn)
     print(message)
@@ -80,7 +77,3 @@ def common(event, algorithm_name, algorithm_fn):
         TargetArn=target_arn,
         Message=json.dumps(message)
     )
-
-
-if __name__ == "__main__":
-    main('', '')
