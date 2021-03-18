@@ -1,5 +1,7 @@
 # apolloniabak.py
 import json
+from pprint import pprint
+
 import boto3
 from domain.objects import Candle, ThreeCandles
 
@@ -71,7 +73,7 @@ def go(event, algorithm, algorithm_fn):
 
     target_arn = get_target_arn(recv_topic_arn)
     print(target_arn)
-    print(message)
+    pprint(message)
 
     sns.publish(
         TargetArn=target_arn,
