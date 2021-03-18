@@ -16,7 +16,7 @@ def apollonia(ccc):
 
 def main(event, context):
     algorithm = "apollonia"
-    common(event, algorithm, apollonia())
+    common(event, algorithm, apollonia)
 
 
 if __name__ == "__main__":
