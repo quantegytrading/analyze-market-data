@@ -1,12 +1,12 @@
 # apollonia.py
 
 from common import go
-from analyze import bullish_patterns_present, bearish_patterns_present
+from indicators.candlestick_patterns import *
 
 
 def apollonia(ccc):
     buys = []
-    if bullish_patterns_present(ccc):
+    if hammer(ccc.candle1) | inverted_hammer(ccc.candle1) | white_soldiers(ccc) | bullish_harami(ccc):
         symbol = ccc.candle1.s
         buys.append(symbol)
     return buys

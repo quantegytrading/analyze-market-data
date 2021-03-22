@@ -2,81 +2,49 @@ from indicators.common import *
 
 
 def white_soldiers(ccc):
-    if green(ccc.candle1):
-        if green(ccc.candle2):
-            if green(ccc.candle3):
-                if ccc.candle1.o > ccc.candle2.o:
-                    if ccc.candle2.o > ccc.candle3.o:
-                        if ccc.candle1.c > ccc.candle2.c:
-                            if ccc.candle2.c > ccc.candle3.c:
-                                return True
-                            else:
-                                return False
-                        else:
-                            return False
-                    else:
-                        return False
-                else:
-                    return False
-            else:
-                return False
-        else:
-            return False
+    if green(ccc.candle1) and \
+            green(ccc.candle2) and \
+            green(ccc.candle3) and \
+            ccc.candle1.o > ccc.candle2.o > ccc.candle3.o and \
+            ccc.candle1.c > ccc.candle2.c > ccc.candle3.c:
+        return True
     else:
         return False
 
 
 def bullish_harami(ccc):
-    if green(ccc.candle1):
-        if red(ccc.candle2):
-            if ccc.candle1.o > ccc.candle2.c:
-                if ccc.candle1.c < ccc.candle2.o:
-                    return True
-                else:
-                    return False
-            else:
-                return False
-        else:
-            return False
+    if green(ccc.candle1) and \
+            red(ccc.candle2) and \
+            ccc.candle1.o > ccc.candle2.c and \
+            ccc.candle1.c < ccc.candle2.o:
+        return True
     else:
         return False
 
 
 def inverted_hammer(candle):
-    if green(candle):
-        if upper_wick(True, candle) >= (body_size(True, candle) * 2):
-            if lower_wick(True, candle) <= (body_size(True, candle) * .5):
-                return True
-            else:
-                return False
-        else:
-            return False
+    if green(candle) and \
+            upper_wick(True, candle) >= (body_size(True, candle) * 2) and \
+            lower_wick(True, candle) <= (body_size(True, candle) * .5):
+        return True
     else:
         return False
 
 
 def hammer(candle):
-    if green(candle):
-        if lower_wick(True, candle) >= (body_size(True, candle) * 2):
-            if upper_wick(True, candle) <= (body_size(True, candle) * .5):
-                return True
-            else:
-                return False
-        else:
-            return False
+    if green(candle) and \
+            lower_wick(True, candle) >= (body_size(True, candle) * 2) and \
+            upper_wick(True, candle) <= (body_size(True, candle) * .5):
+        return True
     else:
         return False
 
 
 def hanging_man(candle):
-    if red(candle):  # Red
-        if lower_wick(False, candle) >= (body_size(False, candle) * 2):  # big lower wick
-            if upper_wick(False, candle) <= (body_size(False, candle) * .5):  # small upper wick
-                return True
-            else:
-                return False
-        else:
-            return False
+    if red(candle) and \
+            lower_wick(False, candle) >= (body_size(False, candle) * 2) and \
+            upper_wick(False, candle) <= (body_size(False, candle) * .5):  # small upper wick
+        return True
     else:
         return False
 

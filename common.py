@@ -40,6 +40,7 @@ def go(event, algorithm, algorithm_fn):
     env = get_env(recv_topic_arn)
     data_type = event_message['data_type']
     exchange = event_message['exchange']
+    interval = event_message['interval']
     market_data_list = event_message['market_data']
     backtesttime = ""
 
@@ -63,6 +64,7 @@ def go(event, algorithm, algorithm_fn):
     message = {
         'algorithm': algorithm,
         'env': env,
+        'interval': interval,
         'buys': flat_buys,
         'buy_prices': buy_prices,
         'sells': sells,
