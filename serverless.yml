@@ -39,6 +39,11 @@ functions:
     events:
       - sns: analyze-quantegy-data-soak
       - sns: analyze-quantegy-data-backtest
+  analyze-market-data-carini:
+    handler: carini.main
+    events:
+      - sns: analyze-quantegy-data-soak
+      - sns: analyze-quantegy-data-backtest
 
 plugins:
   - serverless-python-requirements

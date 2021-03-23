@@ -53,7 +53,7 @@ def go(event, algorithm, algorithm_fn):
             last_candles = data[-3:]
             ccc = get_candle_package(symbol, last_candles)
             backtesttime = ccc.candle1.u
-            buys.append(algorithm_fn(ccc))
+            buys.append(algorithm_fn(symbol, data))
             buy_prices[symbol] = ccc.candle1.c
 
     flat_buys = []
