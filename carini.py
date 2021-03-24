@@ -16,14 +16,14 @@ def carini(symbol, data) -> BuysSells:
     macd = stock.get('macd')
     macd_last_2 = macd[-2:].values.tolist()
     print(macd_last_2)
-    # if macd_last_2[1] > 0:
-    #     if macd_last_2[0] < 0:
-    #         buys.append(symbol)
-    # elif macd_last_2[1] < 0:
-    #     if macd_last_2[0] > 0:
-    #         sells.append(symbol)
+    this_period = macd_last_2[1]
+    last_period = macd_last_2[0]
+    if this_period > 0 and last_period < 0:
+        buys.append(symbol)
+    elif this_period < 0 and last_period[0] > 0:
+        sells.append(symbol)
     # vd = stock['volume_delta']
-    print("-------------------" + symbol + " macd----------------------")
+    # print("-------------------" + symbol + " macd----------------------")
     # print(vd)
     print("------buys---------")
     print(buys)
