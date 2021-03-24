@@ -25,7 +25,7 @@ def carini(symbol, data) -> BuysSells:
         if last_period < 0:
             buys.append(symbol)
     elif this_period < 0:
-        if last_period[0] > 0:
+        if last_period > 0:
             sells.append(symbol)
     # vd = stock['volume_delta']
     # print("-------------------" + symbol + " macd----------------------")
