@@ -15,7 +15,7 @@ def carini(symbol, data):
         print(i)
     vd = stock['volume_delta']
     print("-------------------" + symbol + " macd----------------------")
-    # print(macd)
+    print(macd)
     # print(vd)
     return buys
 
