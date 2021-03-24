@@ -15,15 +15,15 @@ def carini(symbol, data) -> BuysSells:
     stock = sdf.retype(pddf)
     macd = stock.get('macd')
     macd_last_2 = macd[-2:]
-    if macd_last_2[1] > 0:
-        if macd_last_2[0] < 0:
-            buys.append(symbol)
-    elif macd_last_2[1] < 0:
-        if macd_last_2[0] > 0:
-            sells.append(symbol)
+    print(macd_last_2)
+    # if macd_last_2[1] > 0:
+    #     if macd_last_2[0] < 0:
+    #         buys.append(symbol)
+    # elif macd_last_2[1] < 0:
+    #     if macd_last_2[0] > 0:
+    #         sells.append(symbol)
     # vd = stock['volume_delta']
     print("-------------------" + symbol + " macd----------------------")
-    print(macd_last_2)
     # print(vd)
     print("------buys---------")
     print(buys)
