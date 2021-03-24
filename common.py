@@ -31,7 +31,7 @@ def get_target_arn(recv_topic_arn: str) -> str:
 
 
 def go(event, algorithm, algorithm_fn):
-    pprint(event)
+    # pprint(event)
     sns = boto3.client('sns')
     buys = []
     buy_prices = {}
