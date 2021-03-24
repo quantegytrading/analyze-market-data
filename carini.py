@@ -8,13 +8,15 @@ def carini(symbol, data):
     buys = []
     pddf = pd.DataFrame.from_records(data=data, columns=["date", "open", "high", "low", "close", "volume"])
     pddf.set_index("date", inplace=True)
-    print(pddf)
+    # print(pddf)
     stock = sdf.retype(pddf)
     macd = stock.get('macd')
+    for i in macd:
+        print(i)
     vd = stock['volume_delta']
     print("-------------------" + symbol + " macd----------------------")
-    print(macd)
-    print(vd)
+    # print(macd)
+    # print(vd)
     return buys
 
 
