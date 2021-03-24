@@ -1,5 +1,13 @@
 from dataclasses import dataclass
 
+
+@dataclass
+class BuysSells:
+    def __init__(self, buys: list, sells: list):
+        self.buys = buys
+        self.sells = sells
+
+
 @dataclass
 class Candle:
     def __init__(self, dt: str, s: str, o: float, h: float, l: float, c: float, u: str):

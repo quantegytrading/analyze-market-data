@@ -1,11 +1,13 @@
 # apolloniabak.py
 
 from common import go, get_candle_package
+from domain.objects import BuysSells
 from indicators.candlestick_patterns import *
 
 
-def bauhaus(symbol, data):
+def bauhaus(symbol, data) -> BuysSells:
     buys = []
+    sells = []
     if len(data) == 0:
         print("No data found for symbol: " + str(symbol))
     else:
@@ -13,7 +15,7 @@ def bauhaus(symbol, data):
         ccc = get_candle_package(symbol, last_candles)
         if hanging_man(ccc.candle1) or shooting_star(ccc.candle1) or black_crows(ccc) or bearish_harami(ccc):
             buys.append(symbol)
-    return buys
+    return BuysSells(buys, sells)
 
 
 def main(event, context):

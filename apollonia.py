@@ -1,11 +1,13 @@
 # apollonia.py
 
 from common import go, get_candle_package
+from domain.objects import BuysSells
 from indicators.candlestick_patterns import *
 
 
-def apollonia(symbol, data):
+def apollonia(symbol, data) -> BuysSells:
     buys = []
+    sells = []
     if len(data) == 0:
         print("No data found for symbol: " + str(symbol))
     else:
@@ -14,7 +16,7 @@ def apollonia(symbol, data):
         if hammer(ccc.candle1) | inverted_hammer(ccc.candle1) | white_soldiers(ccc) | bullish_harami(ccc):
             symbol = ccc.candle1.s
             buys.append(symbol)
-    return buys
+    return BuysSells(buys, sells)
 
 
 def main(event, context):
