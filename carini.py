@@ -15,9 +15,10 @@ def carini(symbol, data) -> BuysSells:
     stock = sdf.retype(pddf)
     macd = stock.get('macd')
     macd_last_2 = macd[-2:].values.tolist()
+    print(symbol)
     print(macd_last_2)
-    this_period = macd_last_2[1]
-    last_period = macd_last_2[0]
+    this_period = int(macd_last_2[1])
+    last_period = int(macd_last_2[0])
     if this_period > 0 and last_period < 0:
         buys.append(symbol)
     elif this_period < 0 and last_period[0] > 0:
