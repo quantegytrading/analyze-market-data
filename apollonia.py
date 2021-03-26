@@ -20,6 +20,7 @@ def apollonia(symbol, data) -> BuysSells:
 
 
 def main(event, context):
+    print(event)
     algorithm = "apollonia"
     go(event, algorithm, apollonia)
 
