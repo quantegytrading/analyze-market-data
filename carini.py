@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from common import go
 # from indicators.candlestick_patterns import *
 from stockstats import StockDataFrame as sdf
@@ -17,8 +19,8 @@ def carini(symbol, data) -> BuysSells:
     macd_last_2 = macd[-2:].values.tolist()
     print(symbol)
     print(macd_last_2)
-    this_period = int(macd_last_2[1])
-    last_period = int(macd_last_2[0])
+    this_period = Decimal(macd_last_2[1])
+    last_period = Decimal(macd_last_2[0])
     print("this_period: " + str(this_period))
     print("last_period: " + str(last_period))
     if this_period > 0:
