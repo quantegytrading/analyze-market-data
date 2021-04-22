@@ -44,6 +44,11 @@ functions:
     events:
       - sns: analyze-quantegy-data-soak
       - sns: analyze-quantegy-data-backtest
+  analyze-market-data-dangermouse:
+    handler: dangermouse.main
+    events:
+      - sns: analyze-quantegy-data-soak
+      - sns: analyze-quantegy-data-backtest
 
 plugins:
   - serverless-python-requirements
