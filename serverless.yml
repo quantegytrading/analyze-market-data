@@ -37,29 +37,21 @@ functions:
       - sns: analyze-quantegy-data-soak
   analyze-market-data-apollonia:
     handler: apollonia.main
-    environment:
-      prod: False
     events:
       - sns: analyze-quantegy-data-soak
       - sns: analyze-quantegy-data-backtest
   analyze-market-data-bauhaus:
     handler: bauhaus.main
-    environment:
-      prod: False
     events:
       - sns: analyze-quantegy-data-soak
       - sns: analyze-quantegy-data-backtest
   analyze-market-data-carini:
     handler: carini.main
-    environment:
-      prod: False
     events:
       - sns: analyze-quantegy-data-soak
       - sns: analyze-quantegy-data-backtest
   analyze-market-data-dangermouse:
     handler: dangermouse.main
-    environment:
-      prod: False
     events:
       - sns: analyze-quantegy-data-soak
       - sns: analyze-quantegy-data-backtest
