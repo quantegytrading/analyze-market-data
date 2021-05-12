@@ -28,7 +28,7 @@ def get_env(recv_topic_arn: str) -> str:
 
 
 def get_target_arn(recv_topic_arn: str, prod: bool) -> str:
-    if prod:
+    if prod == "True":
         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-prod"
     elif recv_topic_arn.find("backtest") != -1:
         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-backtest"
