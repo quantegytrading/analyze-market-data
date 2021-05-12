@@ -1,5 +1,6 @@
 # apolloniabak.py
 import json
+import os
 from pprint import pprint
 
 import boto3
@@ -26,8 +27,10 @@ def get_env(recv_topic_arn: str) -> str:
         return "soak"
 
 
-def get_target_arn(recv_topic_arn: str) -> str:
-    if recv_topic_arn.find("backtest") != -1:
+def get_target_arn(recv_topic_arn: str, prod: bool) -> str:
+    if prod:
+        return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-prod"
+    elif recv_topic_arn.find("backtest") != -1:
         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-backtest"
     else:
         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-soak"
@@ -78,7 +81,7 @@ def go(event, algorithm, algorithm_fn):
         'backtest-time': backtesttime
     }
 
-    target_arn = get_target_arn(recv_topic_arn)
+    target_arn = get_target_arn(recv_topic_arn, os.environ['prod'])
     print(target_arn)
     pprint(message)
 
