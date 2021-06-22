@@ -16,7 +16,6 @@ def evangeline(symbol, data) -> BuysSells:
     stock = sdf.retype(pddf)
     boll_ub = stock.get('boll_ub')
     boll_lb = stock.get('boll_lb')
-
     print("boll_ub")
     print(boll_ub)
     print("boll_lb")
@@ -24,6 +23,7 @@ def evangeline(symbol, data) -> BuysSells:
     bub_last_2 = boll_ub[-2:].values.tolist()
     blb_last_2 = boll_lb[-2:].values.tolist()
     print(symbol)
+    print(data)
     print(bub_last_2)
     print(blb_last_2)
     this_period = Decimal(bub_last_2[1])
