@@ -1,42 +1,22 @@
+def bullish_fibonacci(candles):
+    ## For 8 candles
+    for i in range(0, 7):
+        candle = candles[i]
+        if not candle.c < candles[i + 5].c or \
+                not candle.c < candles[i + 3].c or \
+                not candle.c < candles[i + 2].c or \
+                not candle.c < candles[i + 1].c:
+            return False
+    return True
 
 
-def fibonacci_timing_pattern(Data, count, step, step_two, step_three, close, buy, sell):
-    # Bullish Fibonacci Timing Pattern
-    counter = -1
-    for i in range(len(Data)):
-        if Data[i, close] < Data[i - step, close] and \
-                Data[i, close] < Data[i - step_two, close] and \
-                Data[i, close] < Data[i - step_three, close]:
-
-            Data[i, buy] = counter
-            counter += -1
-
-            if counter == -count - 1:
-                counter = 0
-            else:
-                continue
-
-        elif Data[i, close] >= Data[i - step, close]:
-            counter = -1
-            Data[i, buy] = 0
-
-            # Bearish Fibonacci Timing Pattern
-    counter = 1
-
-    for i in range(len(Data)):
-        if Data[i, close] > Data[i - step, close] and \
-                Data[i, close] > Data[i - step_two, close] and \
-                Data[i, close] > Data[i - step_three, close]:
-
-            Data[i, sell] = counter
-            counter += 1
-            if counter == count + 1:
-                counter = 0
-            else:
-                continue
-
-        elif Data[i, close] <= Data[i - step, close]:
-            counter = 1
-            Data[i, sell] = 0
-
-    return Data
+def bearish_fibonacci(candles):
+        ## For 8 candles
+        for i in range(0, 7):
+            candle = candles[i]
+            if not candle.c > candles[i + 5].c or \
+                    not candle.c > candles[i + 3].c or \
+                    not candle.c > candles[i + 2].c or \
+                    not candle.c > candles[i + 1].c:
+                return False
+        return True

@@ -6,6 +6,7 @@ from stockstats import StockDataFrame as sdf
 import pandas as pd
 
 from domain.objects import BuysSells
+from indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
 
 
 def evangeline(symbol, data) -> BuysSells:
@@ -16,29 +17,23 @@ def evangeline(symbol, data) -> BuysSells:
     stock = sdf.retype(pddf)
     boll_ub = stock.get('boll_ub')
     boll_lb = stock.get('boll_lb')
-    print("boll_ub")
-    print(boll_ub)
-    print("boll_lb")
-    print(boll_lb)
-    bub_last_2 = boll_ub[-2:].values.tolist()
-    blb_last_2 = boll_lb[-2:].values.tolist()
-    candles = get_all_candle_packages(symbol, data.reverse())
-    print(candles)
 
-    # print(symbol)
-    # print(data)
-    # print(stock)
-    # print(pddf)
-    # print(bub_last_2)
-    # print(blb_last_2)
-    # this_period = Decimal(bub_last_2[1])
-    # last_period = Decimal(bub_last_2[0])
-    # lthis_period = Decimal(blb_last_2[1])
-    # llast_period = Decimal(blb_last_2[0])
-    # print("this_period: " + str(this_period))
-    # print("lthis_period: " + str(lthis_period))
-    # print("last_period: " + str(last_period))
-    # print("llast_period: " + str(llast_period))
+    recent_upper_bollinger_band = boll_ub[-1:].values
+    recent_lower_bollinger_band = boll_lb[-1:].values
+    print("recent_upper_bollinger_band")
+    print(recent_upper_bollinger_band)
+    print("recent_lower_bollinger_band")
+    print(recent_lower_bollinger_band)
+    candles = get_all_candle_packages(symbol, data.reverse)
+    print(candles)
+    bull_fib = bullish_fibonacci(candles)
+    bear_fib = bearish_fibonacci(candles)
+
+    if candles[0].c < recent_lower_bollinger_band and bull_fib:
+        buys.append(symbol)
+    elif candles[0].c > recent_upper_bollinger_band and bear_fib:
+        sells.append(symbol)
+
     return BuysSells(buys, sells)
 
 
