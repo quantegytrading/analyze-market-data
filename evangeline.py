@@ -24,6 +24,8 @@ def evangeline(symbol, data) -> BuysSells:
     blb_last_2 = boll_lb[-2:].values.tolist()
     print(symbol)
     print(data)
+    print(stock)
+    print(pddf)
     print(bub_last_2)
     print(blb_last_2)
     this_period = Decimal(bub_last_2[1])
