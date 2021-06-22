@@ -31,6 +31,8 @@ def evangeline(symbol, data) -> BuysSells:
     print(candles)
     bull_fib = bullish_fibonacci(candles)
     bear_fib = bearish_fibonacci(candles)
+    print(bull_fib)
+    print(bear_fib)
 
     if candles[0].c < recent_lower_bollinger_band[0] and bull_fib:
         buys.append(symbol)

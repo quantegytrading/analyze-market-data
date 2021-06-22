@@ -11,7 +11,10 @@ def get_all_candle_packages(symbol, candles):
     try:
         candle_list = []
         for c in candles:
-            candle_list.append(Candle(c[0], symbol, c[1], c[2], c[3], c[4], c[0]))
+            candle = Candle(c[0], symbol, c[1], c[2], c[3], c[4], c[0])
+            print("get_all_candle_packages")
+            print(candle)
+            candle_list.append(candle)
         return candle_list
     except IndexError as e:
         print("Exception thrown getting data for " + symbol)
