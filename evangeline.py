@@ -21,19 +21,20 @@ def evangeline(symbol, data) -> BuysSells:
     recent_upper_bollinger_band = boll_ub[-1:].values
     recent_lower_bollinger_band = boll_lb[-1:].values
     print("recent_upper_bollinger_band")
-    print(recent_upper_bollinger_band)
+    print(recent_upper_bollinger_band[0])
     print("recent_lower_bollinger_band")
-    print(recent_lower_bollinger_band)
+    print(recent_lower_bollinger_band[0])
     print(data)
-    print(data.reverse())
-    candles = get_all_candle_packages(symbol, data.reverse())
+    data.reverse()
+    print(data)
+    candles = get_all_candle_packages(symbol, data)
     print(candles)
     bull_fib = bullish_fibonacci(candles)
     bear_fib = bearish_fibonacci(candles)
 
-    if candles[0].c < recent_lower_bollinger_band and bull_fib:
+    if candles[0].c < recent_lower_bollinger_band[0] and bull_fib:
         buys.append(symbol)
-    elif candles[0].c > recent_upper_bollinger_band and bear_fib:
+    elif candles[0].c > recent_upper_bollinger_band[0] and bear_fib:
         sells.append(symbol)
 
     return BuysSells(buys, sells)
