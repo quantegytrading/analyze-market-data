@@ -63,7 +63,13 @@ functions:
     events:
       - sns: analyze-quantegy-data-soak
       - sns: analyze-quantegy-data-backtest
-
+  analyze-market-data-evangeline:
+    handler: evangeline.main
+    environment:
+      prod: False
+    events:
+      - sns: analyze-quantegy-data-soak
+      - sns: analyze-quantegy-data-backtest
 
 plugins:
   - serverless-python-requirements
