@@ -13,12 +13,12 @@ def get_all_candle_packages(symbol, candles):
         for c in candles:
             candle = Candle(c[0], symbol, c[1], c[2], c[3], c[4], c[0])
             print("get_all_candle_packages")
-            print(c[0])
-            print(symbol)
-            print(c[1])
-            print(c[2])
-            print(c[3])
-            print(c[4])
+            print(candle.o)
+            print(candle.s)
+            print(candle.c)
+            print(candle.h)
+            print(candle.l)
+            print(candle.dt)
             candle_list.append(candle)
         return candle_list
     except IndexError as e:
