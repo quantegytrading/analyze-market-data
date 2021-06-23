@@ -14,7 +14,7 @@ def bullish_fibonacci(candles):
 def bearish_fibonacci(candles):
     for i in range(0, 7):
         candle = candles[i]
-        print(candle.c + " " + candles[i + 5].c + " " + candles[i + 3].c + " " + candles[i + 2].c + " " + candles[i + 1].c)
+        print(str(candle.c) + " " + str(candles[i + 5].c) + " " + str(candles[i + 3].c) + " " + str(candles[i + 2].c) + " " + str(candles[i + 1].c))
         if candle.c > candles[i + 5].c and \
                 candle.c > candles[i + 3].c and \
                 candle.c > candles[i + 2].c and \
