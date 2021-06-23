@@ -12,13 +12,6 @@ def get_all_candle_packages(symbol, candles):
         candle_list = []
         for c in candles:
             candle = Candle(c[0], symbol, c[1], c[2], c[3], c[4], c[0])
-            print("get_all_candle_packages")
-            print(candle.o)
-            print(candle.s)
-            print(candle.c)
-            print(candle.h)
-            print(candle.l)
-            print(candle.dt)
             candle_list.append(candle)
         return candle_list
     except IndexError as e:
@@ -155,8 +148,6 @@ def go(event, algorithm, algorithm_fn):
     }
 
     target_arn = get_target_arn(recv_topic_arn, os.environ['prod'])
-    print(target_arn)
-    pprint(message)
 
     sns.publish(
         TargetArn=target_arn,
