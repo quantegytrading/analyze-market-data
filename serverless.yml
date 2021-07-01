@@ -30,7 +30,7 @@ provider:
 
 functions:
   analyze-market-data-prod:
-    handler: bauhaus.main
+    handler: evangeline.main
     environment:
       prod: True
     events:
