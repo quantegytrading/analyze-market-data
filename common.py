@@ -49,7 +49,6 @@ def get_target_arn(recv_topic_arn: str, prod: str) -> str:
 
 
 def go(event, algorithm, algorithm_fn):
-    # pprint(event)
     sns = boto3.client('sns')
     buys = []
     buy_prices = {}
@@ -74,6 +73,7 @@ def go(event, algorithm, algorithm_fn):
             backtesttime = ccc.candle1.u
             bs = algorithm_fn(symbol, data)
             buys.append(bs.buys)
+            sells.append(bs.sells)
             buy_prices[symbol] = ccc.candle1.c
 
     flat_buys = []
@@ -81,59 +81,10 @@ def go(event, algorithm, algorithm_fn):
         if buy:
             flat_buys.append(buy[0])
 
-    message = {
-        'algorithm': algorithm,
-        'env': env,
-        'interval': interval,
-        'buys': flat_buys,
-        'buy_prices': buy_prices,
-        'sells': sells,
-        'data_type': data_type,
-        'exchange': exchange,
-        'backtest-time': backtesttime
-    }
-
-    target_arn = get_target_arn(recv_topic_arn, os.environ['prod'])
-    print(target_arn)
-    pprint(message)
-
-    sns.publish(
-        TargetArn=target_arn,
-        Message=json.dumps(message)
-    )
-
-def go(event, algorithm, algorithm_fn):
-    # pprint(event)
-    sns = boto3.client('sns')
-    buys = []
-    buy_prices = {}
-    sells = []
-    event_message = json.loads(event['Records'][0]['Sns']['Message'])
-    recv_topic_arn = event['Records'][0]['Sns']['TopicArn']
-    env = get_env(recv_topic_arn)
-    data_type = event_message['data_type']
-    exchange = event_message['exchange']
-    interval = event_message['interval']
-    market_data_list = event_message['market_data']
-    backtesttime = ""
-
-    for market_data in market_data_list:
-        symbol = market_data['symbol']
-        data = json.loads(market_data['data'])
-        if len(data) == 0:
-            print("No data found for symbol: " + str(symbol))
-        else:
-            last_candles = data[-3:]
-            ccc = get_candle_package(symbol, last_candles)
-            backtesttime = ccc.candle1.u
-            bs = algorithm_fn(symbol, data)
-            buys.append(bs.buys)
-            buy_prices[symbol] = ccc.candle1.c
-
-    flat_buys = []
-    for buy in buys:
-        if buy:
-            flat_buys.append(buy[0])
+    flat_sells = []
+    for sell in sells:
+        if sell:
+            flat_sells.append(sell[0])
 
     message = {
         'algorithm': algorithm,
@@ -141,7 +92,7 @@ def go(event, algorithm, algorithm_fn):
         'interval': interval,
         'buys': flat_buys,
         'buy_prices': buy_prices,
-        'sells': sells,
+        'sells': flat_sells,
         'data_type': data_type,
         'exchange': exchange,
         'backtest-time': backtesttime
