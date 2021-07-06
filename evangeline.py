@@ -12,34 +12,23 @@ from indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
 def evangeline(symbol, data) -> BuysSells:
     buys = []
     sells = []
+    non_tradables = ['USDT', 'BNB']
     pddf = pd.DataFrame.from_records(data=data, columns=["date", "open", "high", "low", "close", "volume"])
     pddf.set_index("date", inplace=True)
     stock = sdf.retype(pddf)
     boll_ub = stock.get('boll_ub')
     boll_lb = stock.get('boll_lb')
-
     recent_upper_bollinger_band = boll_ub[-1:].values
     recent_lower_bollinger_band = boll_lb[-1:].values
-    print("recent_upper_bollinger_band")
-    print(recent_upper_bollinger_band[0])
-    print("recent_lower_bollinger_band")
-    print(recent_lower_bollinger_band[0])
-    print(data)
     data.reverse()
-    print(data)
     candles = get_all_candle_packages(symbol, data)
-    print(candles)
-    bull_fib = bullish_fibonacci(candles)
-    bear_fib = bearish_fibonacci(candles)
-    print(bull_fib)
-    print(bear_fib)
-    print(candles[0].c)
-    print(recent_lower_bollinger_band[0])
-    print(recent_upper_bollinger_band[0])
-
-    if candles[0].c < recent_lower_bollinger_band[0] and bull_fib:
+    if candles[0].c < recent_lower_bollinger_band[0] and \
+            bullish_fibonacci(candles) and \
+            symbol not in non_tradables:  # Dont buy USDT or BNB
         buys.append(symbol)
-    elif candles[0].c > recent_upper_bollinger_band[0] and bear_fib:
+    elif candles[0].c > recent_upper_bollinger_band[0] and \
+            bearish_fibonacci(candles) and \
+            symbol not in non_tradables:  # Dont sell USDT or BNB
         sells.append(symbol)
 
     return BuysSells(buys, sells)
