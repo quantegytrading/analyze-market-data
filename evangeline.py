@@ -12,7 +12,7 @@ from indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
 def evangeline(symbol, data) -> BuysSells:
     buys = []
     sells = []
-    non_tradables = ['USDT', 'BNB']
+    non_tradables = ['USDT', 'BNB', 'USDC']
     pddf = pd.DataFrame.from_records(data=data, columns=["date", "open", "high", "low", "close", "volume"])
     pddf.set_index("date", inplace=True)
     stock = sdf.retype(pddf)
