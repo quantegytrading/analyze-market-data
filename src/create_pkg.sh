@@ -31,7 +31,7 @@ deactivate
 # Create deployment package...
 echo "Creating deployment package..."
 ls -altr
-cp -r env_$function_name/lib/$runtime/site-packages/* $path_cwd
+cp -r env_$function_name/lib/$runtime/site-packages/* .
 
 
 echo $path_cwd/$dir_name
