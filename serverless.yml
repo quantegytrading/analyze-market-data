@@ -16,7 +16,7 @@ service: quantegy-analyze
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.9
   stage: soak
   region: us-east-1
   lambdaHashingVersion: 20201221
