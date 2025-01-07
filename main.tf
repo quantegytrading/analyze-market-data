@@ -33,12 +33,12 @@ resource "aws_lambda_function" "function" {
 data "archive_file" "function_zip" {
   source_dir  = "${path.module}"
   type        = "zip"
-  output_path = "quantegy-analyze.zip"
+  output_path = "${path.module}/../quantegy-analyze.zip"
 }
 
 resource "aws_s3_bucket_object" "file_upload" {
   bucket = "quantegy-analyze-soak-us-east-1-lambda"
   key    = "quantegy-analyze.zip"
-  source = "quantegy-analyze.zip"
-  etag   = "${filemd5("quantegy-analyze.zip")}"
+  source = "${path.module}/../quantegy-analyze.zip"
+  etag   = "${filemd5("${path.module}/../quantegy-analyze.zip")}"
 }
