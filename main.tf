@@ -21,24 +21,12 @@ variable "slack_token" {
   description = "slack token"
 }
 
-resource "null_resource" "install_python_dependencies" {
-  provisioner "local-exec" {
-    command = "bash ${path.module}/src/create_pkg.sh"
 
-    environment = {
-      function_name = "quantegy-analyze"
-      path_module = "${path.module}"
-      runtime = "python3.10"
-      path_cwd = "${path.module}/src"
-    }
-  }
-}
 
 data "archive_file" "function_zip" {
   source_dir  = "src"
   type        = "zip"
   output_path = "${path.module}/quantegy-analyze.zip"
-  depends_on = [ null_resource.install_python_dependencies ]
 }
 
 resource "aws_s3_object" "file_upload" {
@@ -53,7 +41,7 @@ resource "aws_lambda_function" "function" {
   s3_key                          = "quantegy-analyze.zip"
   function_name                   = "quantegy-analyze"
   handler                        = "evangeline.main"
-  runtime                        = "python3.9"
+  runtime                        = "python3.10"
   timeout                        = 900
   memory_size                    = 128
   role                           = "arn:aws:iam::716418748259:role/quantegy-analyze-soak-us-east-1-lambdaRole"
