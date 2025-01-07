@@ -10,6 +10,7 @@ terraform {
 
 resource "aws_lambda_function" "function" {
   s3_bucket                      = "quantegy-analyze-soak-us-east-1-lambda"
+  s3_key                         = "quantegy-analyze.zip"
   function_name                  = "analyse-market-data-prod"
   handler                        = "evangeline.main"
   runtime                        = "python3.9"
