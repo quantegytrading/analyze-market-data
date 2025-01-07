@@ -3,7 +3,7 @@ import json
 import os
 
 import boto3
-from src.domain.objects import Candle, ThreeCandles
+from domain.objects import Candle, ThreeCandles
 from slack_sdk import WebClient
 
 
