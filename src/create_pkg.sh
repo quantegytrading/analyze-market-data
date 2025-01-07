@@ -32,10 +32,7 @@ deactivate
 echo "Creating deployment package..."
 ls -altr
 cp -r env_$function_name/lib/$runtime/site-packages/* .
-
-
-echo $path_cwd/$dir_name
-ls -alt $path_cwd
+ls -altr .
 
 # Removing virtual environment folder...
 echo "Removing virtual environment folder..."
