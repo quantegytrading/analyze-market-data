@@ -35,6 +35,9 @@ cd env_$function_name/lib/$runtime/site-packages/
 cp -r . $path_cwd/$dir_name
 cp -r $path_cwd/ $path_cwd/$dir_name
 
+echo $path_cwd/$dir_name
+ls -alt $path_cwd/$dir_name
+
 # Removing virtual environment folder...
 echo "Removing virtual environment folder..."
 rm -rf $path_cwd/env_$function_name
