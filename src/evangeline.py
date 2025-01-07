@@ -3,8 +3,8 @@ from common import go, get_all_candle_packages
 from stockstats import StockDataFrame as sdf
 import pandas as pd
 
-from src.domain.objects import BuysSells
-from src.indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
+from domain.objects import BuysSells
+from indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
 
 
 def evangeline(symbol, data) -> BuysSells:
