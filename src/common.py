@@ -4,6 +4,8 @@ import os
 
 import boto3
 from src.domain.objects import Candle, ThreeCandles
+from slack_sdk import WebClient
+
 
 
 def get_all_candle_packages(symbol, candles):
@@ -45,6 +47,11 @@ def get_target_arn(recv_topic_arn: str, prod: str) -> str:
         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-backtest"
     else:
         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-soak"
+
+
+def slack_post(msg: str):
+    client = WebClient(token=os.environ['SLACK_TOKEN'])
+    client.chat_postMessage(channel=f"#quantegy-crypto", text=msg, icon_emoji=':moneybag:', username='Quantegy')
 
 
 def go(event, algorithm, algorithm_fn):
@@ -98,6 +105,7 @@ def go(event, algorithm, algorithm_fn):
     }
 
     target_arn = get_target_arn(recv_topic_arn, os.environ['prod'])
+    slack_post(json.dumps(message))
 
     sns.publish(
         TargetArn=target_arn,

@@ -16,6 +16,11 @@ terraform {
   required_version = "~> 1.2"
 }
 
+variable "slack_token" {
+  default     = "invalid"
+  description = "slack token"
+}
+
 resource "aws_lambda_function" "function" {
   s3_bucket                       = "quantegy-analyze-soak-us-east-1-lambda"
   s3_key                          = "quantegy-analyze.zip"
@@ -25,6 +30,11 @@ resource "aws_lambda_function" "function" {
   timeout                        = 900
   memory_size                    = 128
   role                           = "arn:aws:iam::716418748259:role/quantegy-analyze-soak-us-east-1-lambdaRole"
+  environment {
+    variables = {
+      SLACK_TOKEN = var.slack_token
+    }
+  }
 }
 
 

@@ -29,4 +29,4 @@ jobs:
         terraform fmt
         terraform init
         terraform import aws_lambda_function.function quantegy-analyze
-        terraform apply --auto-approve=true
+        terraform apply -var="slack_token=${{ secrets.QUANTEGY_SLACK_TOKEN }}" --auto-approve=true
