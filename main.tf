@@ -41,4 +41,7 @@ resource "aws_s3_bucket_object" "file_upload" {
   key    = "quantegy-analyze.zip"
   source = "../quantegy-analyze.zip"
   etag   = "${filemd5("../quantegy-analyze.zip")}"
+  depends_on = [
+    archive_file.function_zip
+  ]
 }
