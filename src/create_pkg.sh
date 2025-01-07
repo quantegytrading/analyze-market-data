@@ -7,7 +7,7 @@ pwd
 
 cd $path_cwd
 dir_name=lambda_dist_pkg/
-mkdir $dir_name
+mkdir -p $path_cwd/$dir_name
 
 # Create and activate virtual environment...
 virtualenv -p $runtime env_$function_name
@@ -32,6 +32,7 @@ deactivate
 # Create deployment package...
 echo "Creating deployment package..."
 cd env_$function_name/lib/$runtime/site-packages/
+ls -altr
 cp -r . $path_cwd/$dir_name
 cp -r $path_cwd/ $path_cwd/$dir_name
 
