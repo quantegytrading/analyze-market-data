@@ -28,7 +28,7 @@ resource "null_resource" "install_python_dependencies" {
     environment = {
       function_name = "quantegy-analyze"
       path_module = "${path.module}"
-      runtime = "python3.9"
+      runtime = "python3.10"
       path_cwd = "${path.module}/src"
     }
   }
@@ -38,14 +38,14 @@ data "archive_file" "function_zip" {
   source_dir  = "src"
   type        = "zip"
   output_path = "${path.module}/quantegy-analyze.zip"
-  depends_on = [ "null_resource.install_python_dependencies" ]
+  depends_on = [ null_resource.install_python_dependencies ]
 }
 
 resource "aws_s3_object" "file_upload" {
   bucket = "quantegy-analyze-soak-us-east-1-lambda"
   key    = "quantegy-analyze.zip"
   source = "quantegy-analyze.zip"
-  depends_on = [ "data.archive_file.function_zip" ]
+  depends_on = [ data.archive_file.function_zip ]
 }
 
 resource "aws_lambda_function" "function" {
@@ -62,7 +62,7 @@ resource "aws_lambda_function" "function" {
       SLACK_TOKEN = var.slack_token
     }
   }
-  depends_on = [ "aws_s3_object.file_upload" ]
+  depends_on = [ aws_s3_object.file_upload"= ]
 }
 
 
