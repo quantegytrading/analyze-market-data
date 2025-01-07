@@ -5,7 +5,6 @@ pip install virtualenv
 
 pwd
 
-cd $path_cwd
 dir_name=lambda_dist_pkg/
 mkdir -p $path_cwd/$dir_name
 
@@ -31,13 +30,12 @@ deactivate
 
 # Create deployment package...
 echo "Creating deployment package..."
-cd env_$function_name/lib/$runtime/site-packages/
 ls -altr
-cp -r . $path_cwd/$dir_name
-cp -r $path_cwd/ $path_cwd/$dir_name
+cp -r env_$function_name/lib/$runtime/site-packages/* $path_cwd
+
 
 echo $path_cwd/$dir_name
-ls -alt $path_cwd/$dir_name
+ls -alt $path_cwd
 
 # Removing virtual environment folder...
 echo "Removing virtual environment folder..."
