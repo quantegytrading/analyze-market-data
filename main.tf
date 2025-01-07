@@ -62,7 +62,7 @@ resource "aws_lambda_function" "function" {
       SLACK_TOKEN = var.slack_token
     }
   }
-  depends_on = [ aws_s3_object.file_upload"= ]
+  depends_on = [ aws_s3_object.file_upload ]
 }
 
 
