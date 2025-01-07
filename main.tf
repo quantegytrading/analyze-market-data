@@ -39,7 +39,7 @@ data "archive_file" "function_zip" {
 resource "aws_s3_object" "file_upload" {
   bucket = "quantegy-analyze-soak-us-east-1-lambda"
   key    = "quantegy-analyze.zip"
-  source = "src/quantegy-analyze.zip"
+  source = "quantegy-analyze.zip"
   depends_on = [
     data.archive_file.function_zip
   ]
