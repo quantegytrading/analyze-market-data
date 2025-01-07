@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Executing create_pkg.sh..."
+pip install virtualenv
 
 pwd
 
