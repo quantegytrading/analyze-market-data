@@ -15,11 +15,11 @@ ls -altr
 source env_$function_name/bin/activate
 
 # Installing python dependencies...
-FILE=$path_cwd/requirements.txt
+FILE=./requirements.txt
 
 if [ -f "$FILE" ]; then
   echo "Installing dependencies..."
-  echo "From: requirement.txt file exists..."
+  echo "From: requirements.txt file exists..."
   pip install -r "$FILE"
 
 else
@@ -33,7 +33,7 @@ deactivate
 echo "Creating deployment package..."
 cd env_$function_name/lib/$runtime/site-packages/
 cp -r . $path_cwd/$dir_name
-cp -r $path_cwd/lambda_function/ $path_cwd/$dir_name
+cp -r $path_cwd/ $path_cwd/$dir_name
 
 # Removing virtual environment folder...
 echo "Removing virtual environment folder..."
