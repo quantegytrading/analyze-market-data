@@ -17,8 +17,8 @@ terraform {
 }
 
 resource "aws_lambda_function" "function" {
-  filename                       = "quantegy-analyze.zip"
-  function_name                  = "analyse-market-data-prod"
+  s3_bucket                       = "quantegy-analyze-soak-us-east-1-lambda"
+  s3_key                          = "quantegy-analyze.zip"
   handler                        = "evangeline.main"
   runtime                        = "python3.9"
   timeout                        = 900
@@ -27,8 +27,17 @@ resource "aws_lambda_function" "function" {
   role                           = "arn:aws:iam::716418748259:role/quantegy-analyze-soak-us-east-1-lambdaRole"
 }
 
+
+
 data "archive_file" "function_zip" {
   source_dir  = "${path.module}"
   type        = "zip"
   output_path = "quantegy-analyze.zip"
+}
+
+resource "aws_s3_bucket_object" "file_upload" {
+  bucket = "quantegy-analyze-soak-us-east-1-lambda"
+  key    = "quantegy-analyze.zip"
+  source = "${path.module}/quantegy-analyze.zip"
+  etag   = "${filemd5("${path.module}/quantegy-analyze.zip")}"
 }
