@@ -7,7 +7,7 @@ pwd
 
 dir_name=lambda_dist_pkg/
 mkdir -p $path_cwd/$dir_name
-
+cd $path_cwd/
 # Create and activate virtual environment...
 virtualenv -p $runtime env_$function_name
 ls -altr
