@@ -12,7 +12,7 @@ mkdir $dir_name
 # Create and activate virtual environment...
 virtualenv -p $runtime env_$function_name
 ls -altr
-source $path_cwd/env_$function_name/bin/activate
+source $path_cwd/../env_$function_name/bin/activate
 
 # Installing python dependencies...
 FILE=$path_cwd/requirements.txt
