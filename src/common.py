@@ -1,10 +1,9 @@
 # apolloniabak.py
 import json
 import os
-from pprint import pprint
 
 import boto3
-from domain.objects import Candle, ThreeCandles
+from src.domain.objects import Candle, ThreeCandles
 
 
 def get_all_candle_packages(symbol, candles):

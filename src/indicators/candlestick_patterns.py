@@ -1,4 +1,4 @@
-from indicators.common import *
+from src.indicators.common import *
 
 
 def white_soldiers(ccc):

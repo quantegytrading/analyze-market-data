@@ -5,7 +5,7 @@ from common import go
 from stockstats import StockDataFrame as sdf
 import pandas as pd
 
-from domain.objects import BuysSells
+from src.domain.objects import BuysSells
 
 
 def carini(symbol, data) -> BuysSells:

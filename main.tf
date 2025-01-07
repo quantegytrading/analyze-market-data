@@ -31,15 +31,15 @@ resource "aws_lambda_function" "function" {
 
 
 data "archive_file" "function_zip" {
-  source_dir  = "${path.module}"
+  source_dir  = "src"
   type        = "zip"
-  output_path = "${path.module}/../quantegy-analyze.zip"
+  output_path = "${path.module}/quantegy-analyze.zip"
 }
 
 resource "aws_s3_object" "file_upload" {
   bucket = "quantegy-analyze-soak-us-east-1-lambda"
   key    = "quantegy-analyze.zip"
-  source = "../quantegy-analyze.zip"
+  source = "src/quantegy-analyze.zip"
   depends_on = [
     data.archive_file.function_zip
   ]

@@ -1,12 +1,10 @@
-from decimal import Decimal
-
 from common import go, get_all_candle_packages
 # from indicators.candlestick_patterns import *
 from stockstats import StockDataFrame as sdf
 import pandas as pd
 
-from domain.objects import BuysSells
-from indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
+from src.domain.objects import BuysSells
+from src.indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
 
 
 def evangeline(symbol, data) -> BuysSells:

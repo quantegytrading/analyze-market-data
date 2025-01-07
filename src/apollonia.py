@@ -1,8 +1,8 @@
 # apollonia.py
 
 from common import go, get_candle_package
-from domain.objects import BuysSells
-from indicators.candlestick_patterns import *
+from src.domain.objects import BuysSells
+from src.indicators.candlestick_patterns import *
 
 
 def apollonia(symbol, data) -> BuysSells:
