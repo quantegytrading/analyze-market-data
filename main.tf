@@ -28,7 +28,7 @@ resource "aws_lambda_function" "function" {
 }
 
 data "archive_file" "function_zip" {
-  source_dir  = .
+  source_dir  = ${path.module}
   type        = "zip"
   output_path = "quantegy-analyze.zip"
 }
