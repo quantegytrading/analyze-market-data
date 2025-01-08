@@ -45,8 +45,7 @@ resource "aws_lambda_function" "function" {
   timeout                        = 900
   memory_size                    = 128
   role                           = "arn:aws:iam::716418748259:role/quantegy-analyze-soak-us-east-1-lambdaRole"
-  layers                         = tolist(["arn:aws:lambda:us-east-1:336392948345:layer:AWSSDKPandas-Python310:22","arn:aws:lambda:us-east-1:716418748259:layer:quantegy-lambda-layer:6
-  "])
+  layers = tolist(["arn:aws:lambda:us-east-1:336392948345:layer:AWSSDKPandas-Python310:22", "arn:aws:lambda:us-east-1:716418748259:layer:quantegy-lambda-layer:6"])
   environment {
     variables = {
       SLACK_TOKEN = var.slack_token
