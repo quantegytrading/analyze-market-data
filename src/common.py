@@ -69,9 +69,10 @@ def go(event, algorithm, algorithm_fn):
     for market_data in market_data_list:
         symbol = market_data['symbol']
         data = json.loads(market_data['data'])
-        if len(data) == 0:
-            print("No data found for symbol: " + str(symbol))
-        else:
+        if len(data) != 0:
+        #     print("No data found for symbol: " + str(symbol))
+        # else:
+            print(market_data['data'])
             last_candles = data[-3:]
             ccc = get_candle_package(symbol, last_candles)
             backtesttime = ccc.candle1.u
@@ -102,6 +103,7 @@ def go(event, algorithm, algorithm_fn):
         'backtest-time': backtesttime
     }
     # slack_post(json.dumps(message))
+    print(json.dumps(message))
     response = sqs.send_message(
             QueueUrl="https://sqs.us-east-1.amazonaws.com/716418748259/quantegy-execute-queue",
             MessageBody=json.dumps(message))
