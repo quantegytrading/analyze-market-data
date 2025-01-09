@@ -59,6 +59,7 @@ def go(event, algorithm, algorithm_fn):
     buy_prices = {}
     sells = []
     event_message = json.loads(event['Records'][0]['body'])
+    print(event_message)
     env = 'prod'
     data_type = event_message['data_type']
     exchange = event_message['exchange']
