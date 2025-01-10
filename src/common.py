@@ -66,19 +66,20 @@ def go(event, algorithm, algorithm_fn):
     interval = event_message['interval']
     market_data_list = event_message['market_data']
     backtesttime = ""
-
-    for market_data in market_data_list:
-        symbol = market_data['symbol']
-        data = json.loads(market_data['data'])
-        if len(data) != 0:
-            print(market_data['data'])
-            last_candles = data[-3:]
-            ccc = get_candle_package(symbol, last_candles)
-            bs = algorithm_fn(symbol, data)
-            buys.append(bs.buys)
-            sells.append(bs.sells)
-            prices[symbol] = ccc.candle1.c
-
+    try:
+        for market_data in market_data_list:
+            symbol = market_data['symbol']
+            data = json.loads(market_data['data'])
+            if len(data) != 0:
+                print(market_data['data'])
+                last_candles = data[-3:]
+                ccc = get_candle_package(symbol, last_candles)
+                bs = algorithm_fn(symbol, data)
+                buys.append(bs.buys)
+                sells.append(bs.sells)
+                prices[symbol] = ccc.candle1.c
+    except Exception as e:
+        print(e)
     flat_buys = []
     for buy in buys:
         if buy:
