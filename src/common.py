@@ -56,8 +56,7 @@ def get_candle_package(symbol, candles):
 def go(event, algorithm, algorithm_fn):
     sqs = boto3.client('sqs')
     buys = []
-    buy_prices = {}
-    sell_prices = {}
+    prices = {}
     sells = []
     event_message = json.loads(event['Records'][0]['body'])
     print(event_message)
@@ -72,16 +71,13 @@ def go(event, algorithm, algorithm_fn):
         symbol = market_data['symbol']
         data = json.loads(market_data['data'])
         if len(data) != 0:
-            print("No data found for symbol: " + str(symbol))
-        else:
             print(market_data['data'])
             last_candles = data[-3:]
             ccc = get_candle_package(symbol, last_candles)
-            backtesttime = ccc.candle1.u
             bs = algorithm_fn(symbol, data)
             buys.append(bs.buys)
             sells.append(bs.sells)
-            buy_prices[symbol] = ccc.candle1.c
+            prices[symbol] = ccc.candle1.c
 
     flat_buys = []
     for buy in buys:
@@ -98,7 +94,7 @@ def go(event, algorithm, algorithm_fn):
         'env': env,
         'interval': interval,
         'buys': flat_buys,
-        'buy_prices': buy_prices,
+        'prices': buy_prices,
         'sells': flat_sells,
         'data_type': data_type,
         'exchange': exchange,
