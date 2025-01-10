@@ -59,7 +59,7 @@ def go(event, algorithm, algorithm_fn):
     prices = {}
     sells = []
     market_data_list = json.loads(event['Records'][0]['body'])
-    print(event_message)
+    print(market_data_list)
     env = 'prod'
     data_type = 'live'
     exchange = 'binanceus'
