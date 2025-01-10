@@ -57,6 +57,7 @@ def go(event, algorithm, algorithm_fn):
     sqs = boto3.client('sqs')
     buys = []
     buy_prices = {}
+    sell_prices = {}
     sells = []
     event_message = json.loads(event['Records'][0]['body'])
     print(event_message)
