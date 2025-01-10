@@ -58,13 +58,13 @@ def go(event, algorithm, algorithm_fn):
     buys = []
     prices = {}
     sells = []
-    event_message = json.loads(event['Records'][0]['body'])
+    market_data_list = json.loads(event['Records'][0]['body'])
     print(event_message)
     env = 'prod'
-    data_type = event_message['data_type']
-    exchange = event_message['exchange']
-    interval = event_message['interval']
-    market_data_list = event_message['market_data']
+    data_type = 'live'
+    exchange = 'binanceus'
+    interval = '15m'
+   
     backtesttime = ""
 
     for market_data in market_data_list:
