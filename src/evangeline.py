@@ -23,11 +23,11 @@ def evangeline(symbol, data) -> BuysSells:
     if candles[0].c < recent_lower_bollinger_band[0] and \
             bullish_fibonacci(candles) and \
             symbol not in non_tradables:  # Dont buy USDT or BNB
-        buys.append(symbol)
+        sells.append(symbol)
     elif candles[0].c > recent_upper_bollinger_band[0] and \
             bearish_fibonacci(candles) and \
             symbol not in non_tradables:  # Dont sell USDT or BNB
-        sells.append(symbol)
+        buys.append(symbol)
 
     return BuysSells(buys, sells)
 
