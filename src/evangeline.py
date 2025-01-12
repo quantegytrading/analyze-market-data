@@ -23,7 +23,7 @@ def evangeline(symbol, data) -> BuysSells:
     print("Current Time: " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
     for candle in candles:
         print(str(candle.dt))
-        print(symbol + ": " + datetime.datetime.fromtimestamp(int(candle.dt)).strftime('%Y-%m-%d %H:%M:%S.%f'))
+        print(symbol + ": " + datetime.datetime.fromtimestamp(int(candle.dt)/1000.0).strftime('%Y-%m-%d %H:%M:%S.%f'))
     if candles[0].c < recent_lower_bollinger_band[0] and \
             bullish_fibonacci(candles) and \
             symbol not in non_tradables:  # Dont buy USDT or BNB
