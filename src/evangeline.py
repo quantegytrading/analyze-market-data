@@ -22,6 +22,7 @@ def evangeline(symbol, data) -> BuysSells:
     candles = get_all_candle_packages(symbol, data)
     print("Current Time: " + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
     for candle in candles:
+        print(str(candle.dt))
         print(symbol + ": " + datetime.datetime.fromtimestamp(candle.dt).strftime('%Y-%m-%d %H:%M:%S.%f'))
     if candles[0].c < recent_lower_bollinger_band[0] and \
             bullish_fibonacci(candles) and \
