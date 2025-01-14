@@ -40,7 +40,7 @@ resource "aws_lambda_function" "function" {
   s3_bucket                       = "quantegy-analyze-soak-us-east-1-lambda"
   s3_key                          = "quantegy-analyze.zip"
   function_name                   = "quantegy-analyze"
-  handler                        = "evangeline.main"
+  handler                        = "freakyfreezy.main"
   runtime                        = "python3.10"
   timeout                        = 900
   memory_size                    = 128
