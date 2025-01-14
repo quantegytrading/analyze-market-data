@@ -1,5 +1,6 @@
 from common import go, get_all_candle_packages
 # from indicators.candlestick_patterns import *
+import appolonia, bauhaus, carini, dangermouse, evangeline
 from stockstats import StockDataFrame as sdf
 import pandas as pd
 import datetime
