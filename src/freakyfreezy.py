@@ -32,8 +32,8 @@ def freakyfreezy(symbol, data) -> BuysSells:
 
 
 def main(event, context):
-    algorithm = "evangeline"
-    go(event, algorithm, evangeline)
+    algorithm = "freakyfreezy"
+    go(event, algorithm, freakyfreezy)
 
 
 if __name__ == "__main__":
