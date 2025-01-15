@@ -1,8 +1,8 @@
 from common import go, get_all_candle_packages
 # from indicators.candlestick_patterns import *
 from stockstats import StockDataFrame as sdf
-from .apollonia import apollonia
-from .bauhaus import bauhaus
+# from .apollonia import apollonia
+# from .bauhaus import bauhaus
 # import carini
 # import dangermouse
 # import evangeline
@@ -13,13 +13,13 @@ from indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
 
 
 def freakyfreezy(symbol, data) -> BuysSells:
-    apollonia_bs = apollonia.apollonia(symbol, data)
-    bauhaus_bs = bauhaus.bauhaus(symbol, data)
+    # apollonia_bs = apollonia.apollonia(symbol, data)
+    # bauhaus_bs = bauhaus.bauhaus(symbol, data)
     # carini_bs = carini(symbol, data)
     # dangermouse_bs = dangermouse(symbol, data)
     # evangeline_bs = evangeline(symbol, data)
-    buys = apollonia_bs.buys + bauhaus_bs.buys #+ carini_bs.buys + dangermouse_bs.buys + evangeline_bs.buys
-    sells = apollonia_bs.sells + bauhaus_bs.sells #+ carini_bs.sells + dangermouse_bs.sells + evangeline_bs.sells
+    buys = []#apollonia_bs.buys + bauhaus_bs.buys #+ carini_bs.buys + dangermouse_bs.buys + evangeline_bs.buys
+    sells = []#apollonia_bs.sells + bauhaus_bs.sells #+ carini_bs.sells + dangermouse_bs.sells + evangeline_bs.sells
     ff = BuysSells(set(buys), set(sells))
     # print("Apollonia Buys: " + str(apollonia_bs.buys))
     # print("Bauhaus Buys: " + str(bauhaus_bs.buys))
