@@ -3,7 +3,7 @@ from apollonia import apollonia
 # from indicators.candlestick_patterns import *
 from stockstats import StockDataFrame as sdf
 from bauhaus import bauhaus
-from bauhaus import carini
+from carini import carini
 from dangermouse import dangermouse
 from evangeline import evangeline
 import pandas as pd
