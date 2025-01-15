@@ -3,9 +3,9 @@ from common import go, get_all_candle_packages
 from stockstats import StockDataFrame as sdf
 import apollonia
 import bauhaus
-from carini import carini
-from dangermouse import dangermouse
-from evangeline import evangeline
+import carini
+import dangermouse
+import evangeline
 import pandas as pd
 import datetime
 from domain.objects import BuysSells
@@ -15,9 +15,9 @@ from indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
 def freakyfreezy(symbol, data) -> BuysSells:
     apollonia_bs = apollonia.apollonia(symbol, data)
     bauhaus_bs = bauhaus.bauhaus(symbol, data)
-    carini_bs = carini(symbol, data)
-    dangermouse_bs = dangermouse(symbol, data)
-    evangeline_bs = evangeline(symbol, data)
+    carini_bs = carini.carini(symbol, data)
+    dangermouse_bs = dangermouse.dangermouse(symbol, data)
+    evangeline_bs = evangeline.evangeline(symbol, data)
     buys = apollonia_bs.buys + bauhaus_bs.buys + carini_bs.buys + dangermouse_bs.buys + evangeline_bs.buys
     sells = apollonia_bs.sells + bauhaus_bs.sells + carini_bs.sells + dangermouse_bs.sells + evangeline_bs.sells
     ff = BuysSells(set(buys), set(sells))
