@@ -1,8 +1,8 @@
 # apolloniabak.py
 
 from common import go, get_candle_package
-from .domain.objects import BuysSells
-from .indicators.candlestick_patterns import *
+from domain.objects import BuysSells
+from indicators.candlestick_patterns import *
 
 
 def bauhaus(symbol, data) -> BuysSells:
