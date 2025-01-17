@@ -13,7 +13,7 @@ from indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
 
 
 def append_with_letters(list, letter):
-    return [letter + x for x in list]
+    return [f'({letter}) {x}' for x in list]
 
 
 def freakyfreezy(symbol, data) -> BuysSells:
