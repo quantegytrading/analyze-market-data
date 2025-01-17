@@ -12,7 +12,7 @@ from domain.objects import BuysSells
 from indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
 
 
-def append_with_letters(list, letter):
+def append_with_letters(list, letter) -> []:
     return [f'({letter}) {x}' for x in list]
 
 
@@ -29,7 +29,7 @@ def freakyfreezy(symbol, data) -> BuysSells:
     # sells = apollonia_bs.sells + bauhaus_bs.sells + carini_bs.sells + dangermouse_bs.sells + evangeline_bs.sells
     print("Full Buys: " + str(buys))
     print("Full Sells: " + str(sells))
-    ff = BuysSells(set(buys), set(sells))
+    # ff = BuysSells(set(buys), set(sells))
     # print("Apollonia Buys: " + str(apollonia_bs.buys))
     # print("Bauhaus Buys: " + str(bauhaus_bs.buys))
     # print("Carini Buys: " + str(carini_bs.buys))
