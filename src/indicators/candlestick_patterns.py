@@ -1,4 +1,4 @@
-from common import green, red, lower_wick, upper_wick, body_size
+from indicators.common import green, red, lower_wick, upper_wick, body_size
 
 
 def white_soldiers(ccc):
