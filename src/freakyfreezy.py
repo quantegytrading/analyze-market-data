@@ -14,7 +14,7 @@ from indicators.fibonacci import bullish_fibonacci, bearish_fibonacci
 
 def freakyfreezy(symbol, data) -> BuysSells:
     apollonia_bs = apollonia(symbol, data)
-    bauhaus_bs = bauhaus.bauhaus(symbol, data)
+    bauhaus_bs = bauhaus(symbol, data)
     carini_bs = carini(symbol, data)
     dangermouse_bs = dangermouse(symbol, data)
     evangeline_bs = evangeline(symbol, data)
