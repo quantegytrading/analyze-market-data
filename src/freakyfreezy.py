@@ -63,11 +63,11 @@ def frequency_of_buys_sells(head, tail, ret_val=[], frequency=1):
     if head in tail:
         frequency += 1
         head, *tail = tail
-        frequency_of_buys_sells(head, tail, frequency)
+        frequency_of_buys_sells(head, tail, ret_val, frequency)
     else:
         ret_val.append(f'{head} ({frequency})')
         head, *tail = tail
-        frequency_of_buys_sells(head, tail, ret_val)
+        frequency_of_buys_sells(head, tail, ret_val, 1)
 
 
 
