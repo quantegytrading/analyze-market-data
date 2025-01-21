@@ -59,6 +59,7 @@ def freakyfreezy(symbol, data) -> BuysSells:
 
 def frequency_of_buys_sells(head, tail, ret_val=[], frequency=1):
     if not tail:
+        ret_val.append(f'{head} ({frequency})')
         return ret_val
     if head in tail:
         frequency += 1
@@ -66,7 +67,6 @@ def frequency_of_buys_sells(head, tail, ret_val=[], frequency=1):
         frequency_of_buys_sells(head, tail, ret_val, frequency)
     else:
         ret_val.append(f'{head} ({frequency})')
-        head, *tail = tail
         frequency_of_buys_sells(head, tail, ret_val, 1)
 
 
