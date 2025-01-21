@@ -17,7 +17,8 @@ def append_with_letters(list, letter) -> []:
 
 
 def freakyfreezy(symbol, data) -> BuysSells:
-    apollonia_bs = apollonia(symbol, data)
+    # apollonia_bs = apollonia(symbol, data)
+    apollonia_bs = BuysSells([],[])
     bauhaus_bs = bauhaus(symbol, data)
     carini_bs = carini(symbol, data)
     dangermouse_bs = dangermouse(symbol, data)
