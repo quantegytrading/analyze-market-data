@@ -23,14 +23,23 @@ def freakyfreezy(symbol, data) -> BuysSells:
     carini_bs = carini(symbol, data)
     dangermouse_bs = dangermouse(symbol, data)
     evangeline_bs = evangeline(symbol, data)
-    buys = append_with_letters(apollonia_bs.buys, "A") + append_with_letters(bauhaus_bs.buys, "B") + append_with_letters(carini_bs.buys, "C") + append_with_letters(dangermouse_bs.buys, "D") + append_with_letters(evangeline_bs.buys, "E")
-    sells = append_with_letters(apollonia_bs.sells, "A") + append_with_letters(bauhaus_bs.sells, "B") + append_with_letters(carini_bs.sells, "C") + append_with_letters(dangermouse_bs.sells, "D") + append_with_letters(evangeline_bs.sells, "E")
+    # buys = append_with_letters(apollonia_bs.buys, "A") + append_with_letters(bauhaus_bs.buys, "B") + append_with_letters(carini_bs.buys, "C") + append_with_letters(dangermouse_bs.buys, "D") + append_with_letters(evangeline_bs.buys, "E")
+    # sells = append_with_letters(apollonia_bs.sells, "A") + append_with_letters(bauhaus_bs.sells, "B") + append_with_letters(carini_bs.sells, "C") + append_with_letters(dangermouse_bs.sells, "D") + append_with_letters(evangeline_bs.sells, "E")
 
     # buys =  apollonia_bs.buys + bauhaus_bs.buys + carini_bs.buys + dangermouse_bs.buys + evangeline_bs.buys
     # sells = apollonia_bs.sells + bauhaus_bs.sells + carini_bs.sells + dangermouse_bs.sells + evangeline_bs.sells
     print("Full Buys: " + str(buys))
-    print("Full Sells: " + str(sells))
+    print("full sells: " + str(sells))
+    for buy in buys:
+        if buy in sells:
+            buys.remove(buy)
+            sells.remove(buy)
+    head, *tail = sorted(buys)
+    buys = frequency_of_buys_sells(head, tail)
+    head, *tail = sorted(sells)
+    sells = frequency_of_buys_sells(head, tail)
     ff = BuysSells(buys, sells)
+
     # print("Apollonia Buys: " + str(apollonia_bs.buys))
     # print("Bauhaus Buys: " + str(bauhaus_bs.buys))
     # print("Carini Buys: " + str(carini_bs.buys))
@@ -44,6 +53,21 @@ def freakyfreezy(symbol, data) -> BuysSells:
     print("Buys: " + str(ff.buys))
     print("Sells: " + str(ff.sells))
     return ff
+
+
+def frequency_of_buys_sells(head, tail, ret_val=[], frequency=1):
+    if not tail:
+        return ret_val
+    if head in tail:
+        frequency += 1
+        head, *tail = tail
+        frequency_of_buys_sells(head, tail, frequency)
+    else:
+        ret_val.append(f'{head} ({frequency})')
+        head, *tail = tail
+        frequency_of_buys_sells(head, tail, ret_val)
+
+
 
 
 def main(event, context):
