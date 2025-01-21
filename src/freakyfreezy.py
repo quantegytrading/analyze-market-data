@@ -28,8 +28,8 @@ def freakyfreezy(symbol, data) -> BuysSells:
 
     # buys =  apollonia_bs.buys + bauhaus_bs.buys + carini_bs.buys + dangermouse_bs.buys + evangeline_bs.buys
     # sells = apollonia_bs.sells + bauhaus_bs.sells + carini_bs.sells + dangermouse_bs.sells + evangeline_bs.sells
-    print("Full Buys: " + str(buys))
-    print("full sells: " + str(sells))
+    # print("Full Buys: " + str(buys))
+    # print("full sells: " + str(sells))
     for buy in buys:
         if buy in sells:
             buys.remove(buy)
