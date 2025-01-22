@@ -80,15 +80,15 @@ def go(event, algorithm, algorithm_fn):
                 prices[symbol] = ccc.candle1.c
     except Exception as e:
         print(e)
-    flat_buys = []
-    for buy in buys:
-        if buy:
-            flat_buys.append(buy[0])
-
-    flat_sells = []
-    for sell in sells:
-        if sell:
-            flat_sells.append(sell[0])
+    # flat_buys = []
+    # for buy in buys:
+    #     if buy:
+    #         flat_buys.append(buy[0])
+    # 
+    # flat_sells = []
+    # for sell in sells:
+    #     if sell:
+    #         flat_sells.append(sell[0])
 
     message = {
         'algorithm': algorithm,
