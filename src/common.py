@@ -31,6 +31,25 @@ def get_candle_package(symbol, candles):
         print("Exception thrown getting data for " + symbol)
 
 
+def frequency_of_buys_sells(head: object, tail: object, ret_val=None, frequency: object = 1) -> object | list:
+    if ret_val is None:
+        ret_val = []
+    if not tail:
+        ret_val.append(f'{head} ({frequency})')
+        return ret_val
+    if head in tail:
+        frequency += 1
+        head, *tail = tail
+        ret_val = frequency_of_buys_sells(head, tail, ret_val, frequency)
+        return ret_val
+
+    else:
+        ret_val.append(f'{head} ({frequency})')
+        head, *tail = tail
+        ret_val = frequency_of_buys_sells(head, tail, ret_val, 1)
+        return ret_val
+
+
 # def get_env(recv_topic_arn: str) -> str:
 #     if recv_topic_arn.find("backtest") != -1:
 #         return "backtest"
@@ -89,7 +108,18 @@ def go(event, algorithm, algorithm_fn):
     # for sell in sells:
     #     if sell:
     #         flat_sells.append(sell[0])
-
+    
+    if len(buys) > 0:
+        for buy in buys:
+            if buy in sells:
+                buys.remove(buy)
+                sells.remove(buy)
+        head, *tail = sorted(buys)
+        buys = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
+    if len(sells) > 0:
+         head, *tail = sorted(sells)
+         sells = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
+        
     message = {
         'algorithm': algorithm,
         'env': env,
