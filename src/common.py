@@ -109,24 +109,26 @@ def go(event, algorithm, algorithm_fn):
     #     if sell:
     #         flat_sells.append(sell[0])
     
-    if len(buys) > 0:
-        for buy in buys:
-            if buy in sells:
-                buys.remove(buy)
-                sells.remove(buy)
-        head, *tail = sorted(buys)
-        buys = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
-    if len(sells) > 0:
-         head, *tail = sorted(sells)
-         sells = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
+    flat_buys = [item for sublist in buys for item in sublist]
+    flat_sells = [item for sublist in sells for item in sublist]
+    if len(flat_buys) > 0:
+        for buy in flat_buys:
+            if buy in flat_sells:
+                flat_buys.remove(buy)
+                flat_sells.remove(buy)
+        head, *tail = sorted(flat_buys)
+        flat_buys = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
+    if len(flat_sells) > 0:
+         head, *tail = sorted(flat_sells)
+         flat_sells = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
         
     message = {
         'algorithm': algorithm,
         'env': env,
         'interval': interval,
-        'buys': buys,
+        'buys': flat_buys,
         'prices': prices,
-        'sells': sells,
+        'sells': flat_sells,
         'data_type': data_type,
         'exchange': exchange,
         'backtest-time': backtesttime
