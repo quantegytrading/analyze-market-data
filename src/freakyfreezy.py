@@ -54,10 +54,12 @@ def freakyfreezy(symbol, data) -> BuysSells:
             if buy in sells:
                 buys.remove(buy)
                 sells.remove(buy)
-        buys_freq.append(f'{head} ({len(buys)})')
+        head, *tail = sorted(buys)
+        buys = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
     if len(sells) > 0:
-        sells_freq.append(f'{head} ({len(sells)})')
-    ff = BuysSells(buys_freq, sells_freq)
+         head, *tail = sorted(sells)
+         sells = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
+    ff = BuysSells(buys, sells)
 
     # print("Apollonia Buys: " + str(apollonia_bs.buys))
     # print("Bauhaus Buys: " + str(bauhaus_bs.buys))
