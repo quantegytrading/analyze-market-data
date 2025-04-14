@@ -50,26 +50,48 @@ def frequency_of_buys_sells(head: object, tail: object, ret_val=None, frequency:
         return ret_val
 
 
-# def get_env(recv_topic_arn: str) -> str:
-#     if recv_topic_arn.find("backtest") != -1:
-#         return "backtest"
-#     else:
-#         return "soak"
-#
-#
-# def get_target_arn(recv_topic_arn: str, prod: str) -> str:
-#     print("Prod: " + prod)
-#     if prod == "true":
-#         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-prod"
-#     elif recv_topic_arn.find("backtest") != -1:
-#         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-backtest"
-#     else:
-#         return "arn:aws:sns:us-east-1:716418748259:trade-quantegy-data-soak"
+def algos_of_buys_sells(buys, sells):
+    buys_retval = []
+    sells_retval  = []
+    buys_w_algos = []
+    sells_w_algos = []
 
+    # extract symbol and algo
+    for buy in buys:
+        buys_w_algos.append((buy[:-4], buy[-2]))
 
-# def slack_post(msg: str):
-#     client = WebClient(token=os.environ['SLACK_TOKEN'])
-#     client.chat_postMessage(channel=f"#quantegy-crypto", text=msg, icon_emoji=':moneybag:', username='Quantegy')
+    for sell in sells:
+        sells_w_algos.append((sell[:-4], sell[-2]))
+
+    # make buys dict
+    buys_retval_dict = {}
+    for buy_w_algo in buys_w_algos:
+        algos = set()
+        for buy_w_algo2 in buys_w_algos:
+            if buy_w_algo[0] == buy_w_algo2[0]:
+                algos.add(buy_w_algo2[1])
+        buys_retval_dict[buy_w_algo[0]] = list(algos)
+
+    # make sells dict
+    sells_retval_dict = {}
+    for sell_w_algo in sells_w_algos:
+        algos = set()
+        for sell_w_algo2 in sells_w_algos:
+            if sell_w_algo[0] == sell_w_algo2[0]:
+                algos.add(sell_w_algo2[1])
+        sells_retval_dict[sell_w_algo[0]] = list(algos)
+
+    # normalize buys list
+    for buy in buys_retval_dict.keys():
+        if buy not in sells_retval_dict.keys():
+            buys_retval.append(f'{buy} {buys_retval_dict[buy]}')
+
+    # normalize sells list
+    for buy in sells_retval_dict.keys():
+        if buy not in buys_retval_dict.keys():
+            sells_retval.append(f'{buy} {sells_retval_dict[buy]}')
+
+    return buys_retval, sells_retval
 
 
 def go(event, algorithm, algorithm_fn):
@@ -116,11 +138,12 @@ def go(event, algorithm, algorithm_fn):
             if buy in flat_sells:
                 flat_buys.remove(buy)
                 flat_sells.remove(buy)
-        head, *tail = sorted(flat_buys)
-        flat_buys = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
-    if len(flat_sells) > 0:
-         head, *tail = sorted(flat_sells)
-         flat_sells = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
+    flat_buys, flat_sells = algos_of_buys_sells(flat_buys, flat_sells)
+    #     head, *tail = sorted(flat_buys)
+    #     flat_buys = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
+    # if len(flat_sells) > 0:
+    #      head, *tail = sorted(flat_sells)
+    #      flat_sells = frequency_of_buys_sells(head=head, tail=tail, ret_val=[], frequency=1)
         
     message = {
         'algorithm': algorithm,
