@@ -23,12 +23,12 @@ def freakyfreezy(symbol, data) -> BuysSells:
     carini_bs = carini(symbol, data)
     dangermouse_bs = dangermouse(symbol, data)
     evangeline_bs = evangeline(symbol, data)
-    # buys = append_with_letters(apollonia_bs.buys, "A") + append_with_letters(bauhaus_bs.buys, "B") + append_with_letters(carini_bs.buys, "C") + append_with_letters(dangermouse_bs.buys, "D") + append_with_letters(evangeline_bs.buys, "E")
-    # sells = append_with_letters(apollonia_bs.sells, "A") + append_with_letters(bauhaus_bs.sells, "B") + append_with_letters(carini_bs.sells, "C") + append_with_letters(dangermouse_bs.sells, "D") + append_with_letters(evangeline_bs.sells, "E")
-    buys_freq = []
-    sells_freq = []
-    buys =  apollonia_bs.buys + bauhaus_bs.buys + carini_bs.buys + dangermouse_bs.buys + evangeline_bs.buys
-    sells = apollonia_bs.sells + bauhaus_bs.sells + carini_bs.sells + dangermouse_bs.sells + evangeline_bs.sells
+    buys = append_with_letters(apollonia_bs.buys, "A") + append_with_letters(bauhaus_bs.buys, "B") + append_with_letters(carini_bs.buys, "C") + append_with_letters(dangermouse_bs.buys, "D") + append_with_letters(evangeline_bs.buys, "E")
+    sells = append_with_letters(apollonia_bs.sells, "A") + append_with_letters(bauhaus_bs.sells, "B") + append_with_letters(carini_bs.sells, "C") + append_with_letters(dangermouse_bs.sells, "D") + append_with_letters(evangeline_bs.sells, "E")
+    # buys_freq = []
+    # sells_freq = []
+    # buys =  apollonia_bs.buys + bauhaus_bs.buys + carini_bs.buys + dangermouse_bs.buys + evangeline_bs.buys
+    # sells = apollonia_bs.sells + bauhaus_bs.sells + carini_bs.sells + dangermouse_bs.sells + evangeline_bs.sells
     print("Full Buys: " + str(buys))
     print("full sells: " + str(sells))
     ff = BuysSells(buys, sells)
