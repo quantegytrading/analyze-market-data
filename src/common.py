@@ -149,9 +149,9 @@ def go(event, algorithm, algorithm_fn):
         'algorithm': algorithm,
         'env': env,
         'interval': interval,
-        'buys': flat_buys,
+        'buys': flat_sells,
         'prices': prices,
-        'sells': flat_sells,
+        'sells': flat_buys,
         'data_type': data_type,
         'exchange': exchange,
         'backtest-time': backtesttime
